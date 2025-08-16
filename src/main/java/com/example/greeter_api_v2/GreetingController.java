@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 // @RestController tells Spring this class will handle incoming web requests.
 @RestController
@@ -16,7 +17,7 @@ public class GreetingController {
     // @CrossOrigin is essential for local development. It tells the browser
     // that it's okay for our Angular app (on port 4200) to make a request
     // to this backend (on port 8080).
-    @CrossOrigin(origins = "http://localhost:4200")
+    @CrossOrigin(origins = { "http://localhost:4200", "https://greeter-ui-v2.onrender.com" })
 
     // @GetMapping maps HTTP GET requests for the "/api/greet" path to this method.
     @GetMapping("/api/greet")
