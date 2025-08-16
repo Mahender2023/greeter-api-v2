@@ -17,7 +17,7 @@ public class GreetingController {
     // @CrossOrigin is essential for local development. It tells the browser
     // that it's okay for our Angular app (on port 4200) to make a request
     // to this backend (on port 8080).
-    @CrossOrigin(origins = { "http://localhost:4200", "https://greeter-ui-v2.onrender.com" })
+    @CrossOrigin(origins = "*")
 
     // @GetMapping maps HTTP GET requests for the "/api/greet" path to this method.
     @GetMapping("/api/greet")
