@@ -1,6 +1,6 @@
 # --- STAGE 1: Build the application ---
-# Use a Maven image that includes JDK 21 to build our project.
-FROM maven:3.9-eclipse-temurin-21-focal AS build
+# Use a Maven image that includes JDK 21. We use 'jammy' instead of 'focal'.
+FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
 
 # Set the working directory inside the container.
 WORKDIR /app
