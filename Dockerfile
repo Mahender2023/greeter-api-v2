@@ -1,25 +1,22 @@
 # --- STAGE 1: Build the application ---
-# Use a Maven image that includes JDK 21. We use 'jammy' instead of 'focal'.
-FROM maven:3.9.6-eclipse-temurin-21-jammy AS build
+# Use a well-known, stable Maven image that includes JDK 17
+FROM maven:3.9-eclipse-temurin-17-focal AS build
 
 # Set the working directory inside the container.
 WORKDIR /app
 
-# Copy the pom.xml file first. Docker is smart and will only re-download
-# dependencies if this file changes, speeding up future builds.
+# Copy the pom.xml file first to leverage Docker layer caching
 COPY pom.xml .
 
 # Copy the rest of our source code.
 COPY src ./src
 
 # Run the Maven command to compile the code and package it into a .jar file.
-# -DskipTests makes the build faster.
 RUN mvn package -DskipTests
 
 # --- STAGE 2: Create the final, lightweight runtime image ---
-# Use a slim JRE (Java Runtime Environment) image. It's much smaller
-# than a full JDK, making our final container more efficient.
-FROM openjdk:21-slim
+# Use a slim JRE image for Java 17
+FROM openjdk:17-slim
 
 # Set the working directory.
 WORKDIR /app
